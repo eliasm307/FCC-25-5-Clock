@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap"; 
-import CalculatorSection from "./Components/CalculatorSection";
+import ControlSection from "./Components/ControlSection";
 import HistorySection from "./Components/HistorySection";
 
 import "./global-styles.scss"; 
@@ -16,41 +16,20 @@ TODO
 */
 
 const date = new Date();
-
-
-const generateHistoryItem = () => {
-  return {
-    expression: "expression",
-    result: Math.random() * 100
-  }
-}
+ 
 
 class App extends React.Component {
 
   constructor(props) {
     super(props);
 
-    this.state = {
-      currentExpression: "",
-      currentResult: "",
-      arrayHistory: [ 
-      ]
+    this.state = { 
+      arrayHistory: []
     }
+  
+
+  }
  
-    this.handleSuccessfulEvaluation = this.handleSuccessfulEvaluation.bind(this);
-
-  }
-
-  handleSuccessfulEvaluation({expression, result}) {
-    console.log("APP", "handling successufl evaluation of expression and result:", { expression, result }); 
-    
-    this.setState({
-      arrayHistory: [
-        { expression, result },
-        ...this.state.arrayHistory
-      ]
-    }); 
-  }
 
   render() {
     // console.log(date.toLocaleString(), "App pre-render, this.state.arrayHistory", this.state.arrayHistory);
@@ -59,12 +38,11 @@ class App extends React.Component {
       <>
         <Container fluid className="App">
           
-          <h1>Javascript Calculator</h1> 
+          <h1>25 + 5 Clock</h1> 
            
           <Row noGutters>
 
-            <CalculatorSection
-              handleSuccessfulEvaluation={this.handleSuccessfulEvaluation}
+            <ControlSection 
             />
 
             <HistorySection
