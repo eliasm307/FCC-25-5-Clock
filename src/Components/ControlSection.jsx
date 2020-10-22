@@ -29,13 +29,13 @@ const ControlSection = ({ className }) => {
     
     <section
       id="control-section"
-      className="col-lg-6"
+      className="col-lg-6 section-container"
     > 
       <Row noGutters > 
         <h2>Controls</h2>  
       </Row>
 
-      <Row noGutters id="container-display">  
+      <Row noGutters className="">  
         
         <Col md={true} className="mb-3">  
           <PeriodControl
@@ -60,11 +60,12 @@ const ControlSection = ({ className }) => {
 
       </Row>
   
-      <Row noGutters>
-        <Col id="container-timer"> 
+      <Row noGutters> 
+        <Col md={true} className="mb-3">  
           <Timer
-          />
-        </Col> 
+            title="Session"
+          /> 
+        </Col>
       </Row>
   
     </section> 

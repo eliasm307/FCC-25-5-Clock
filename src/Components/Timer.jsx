@@ -4,7 +4,7 @@ import clsx from "clsx";
 
 import { Row, Col, Button } from "react-bootstrap"; 
 
-import "./ControlSection.scss";  
+import "./Timer.scss";  
 
 import { numberButtons } from "../Data/NumberButtons";
 import { controlButtons } from "../Data/ControlButtons";
@@ -21,19 +21,21 @@ const Timer = ({ className, title, idPrefix }) => {
   // rendering a dummy p element for display as FCC tests didnt work well with textarea
 
   return ( 
-    <div id="">  
+    <div className="timer-container">  
       <Row
         id= "timer-label"
         noGutters
       >
-        Session
+        {title}
       </Row>
 
       <Row noGutters> 
         <Col className="m-1"> 
           <p
             id="time-left"
-          >25:00</p>
+          >
+            25:00
+          </p>
         </Col>  
 
       </Row>

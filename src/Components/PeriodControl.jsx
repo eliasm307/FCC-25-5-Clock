@@ -4,7 +4,7 @@ import clsx from "clsx";
 
 import { Row, Col, Button } from "react-bootstrap"; 
 
-import "./ControlSection.scss";  
+import "./PeriodControl.scss";  
 
 import { numberButtons } from "../Data/NumberButtons";
 import { controlButtons } from "../Data/ControlButtons";
@@ -12,16 +12,12 @@ import { controlButtons } from "../Data/ControlButtons";
 const PeriodControl = ({ className, title, idPrefix }) => {
   // console.log("controlSection: Start"); 
   
-  const [displayText, setDisplayText] = React.useState("0");
-  const [previewText, setPreviewText] = React.useState("0");
-  const [lastResult, setLastResult] = React.useState("0");
-  const [evaluatedExpression, setEvaluatedExpression] = React.useState(0);
-
+  const [displayText, setDisplayText] = React.useState("0"); 
   
   // rendering a dummy p element for display as FCC tests didnt work well with textarea
 
   return ( 
-    <div id="">  
+    <div className="container-period-control">  
       <Row
         id={idPrefix + "-label"}
         noGutters
@@ -32,8 +28,7 @@ const PeriodControl = ({ className, title, idPrefix }) => {
       <Row noGutters>
         <Col className="m-1"> 
           <Button
-            id={idPrefix + "-decrement"}
-            className="w-100"
+            id={idPrefix + "-decrement"} 
           >
             -
           </Button>
@@ -42,6 +37,7 @@ const PeriodControl = ({ className, title, idPrefix }) => {
         <Col className="m-1"> 
           <p
             id={idPrefix + "-length"}
+            className="period-label"
           >
             {idPrefix + "-length"}
           </p>
@@ -49,8 +45,7 @@ const PeriodControl = ({ className, title, idPrefix }) => {
 
         <Col className="m-1">
           <Button
-            id={idPrefix + "-increment"}
-            className="w-100"
+            id={idPrefix + "-increment"} 
           >
             +
           </Button>

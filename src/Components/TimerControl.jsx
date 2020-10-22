@@ -29,8 +29,7 @@ const TimerControl = ({ className, title, idPrefix }) => {
       <Row noGutters>
         <Col className="m-1"> 
           <Button
-            id="start_stop"
-            className="w-100"
+            id="start_stop" 
           >
             Start/Stop
           </Button>
@@ -38,8 +37,7 @@ const TimerControl = ({ className, title, idPrefix }) => {
 
         <Col className="m-1">
           <Button
-            id="reset"
-            className="w-100"
+            id="reset" 
           >
             Reset
           </Button>

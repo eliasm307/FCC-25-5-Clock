@@ -24,7 +24,10 @@ const HistorySection = ({ arrayHistory, className, ...restProps }) => {
   // console.log("HistorySection: Pre-Render");
   return (
     
-    <section id="history-section" className="col"> 
+    <section
+      id="history-section"
+      className="col"
+    > 
       <Row noGutters> 
         <h2 id="display">History</h2> 
       </Row>

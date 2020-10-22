@@ -4,10 +4,36 @@
 $primary: black;
 $standardSpacing: 10px;
 
+body {
+  background-color: rgb(29, 29, 29);
+  // padding: 5%;
+  font-family: sans-serif;
+  text-align: center;
+  color: white; 
+  
+}
+
+h1 {
+  padding-top: 10px;
+}
+
+section {
+  border: 1px solid grey;
+  margin: $standardSpacing $standardSpacing;
+  padding: $standardSpacing $standardSpacing !important; 
+  border-radius: 3px; 
+}  
+
+.display-none {
+  display: none;
+}
+
 .btn {
   background-color: black;
   border: none;
   outline: none;
+  width: 100%;
+  
 }
 
 .btn:focus,
@@ -26,33 +52,5 @@ $standardSpacing: 10px;
   // padding: 0px 0px;
 }
 
-body {
-  background-color: rgb(29, 29, 29);
-  // padding: 5%;
-  
-}
 
-.App {
-  font-family: sans-serif;
-  text-align: center;
- 
-  
-  color: white; 
-
-  h1 {
-    padding-top: 10px;
-  }
-  
-  section {
-    border: 1px solid gray;
-    margin: $standardSpacing $standardSpacing;
-    padding: $standardSpacing;
-    border-radius: 3px; 
-  } 
-
-}
-
-.display-none {
-  display: none;
-}
  
