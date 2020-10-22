@@ -19,14 +19,15 @@ const PeriodControl = ({ className, title, idPrefix }) => {
   return ( 
     <div className="container-period-control">  
       <Row
-        id={idPrefix + "-label"}
+        id={idPrefix + "-label"} 
+        className="control-label"
         noGutters
       >
         {title}
       </Row>
 
       <Row noGutters>
-        <Col className="m-1"> 
+        <Col className="px-1"> 
           <Button
             id={idPrefix + "-decrement"} 
           >
@@ -34,16 +35,18 @@ const PeriodControl = ({ className, title, idPrefix }) => {
           </Button>
         </Col> 
 
-        <Col className="m-1"> 
+        <Col
+          sm={6} 
+          className="period-label"
+        > 
           <p
             id={idPrefix + "-length"}
-            className="period-label"
           >
             {idPrefix + "-length"}
           </p>
         </Col> 
 
-        <Col className="m-1">
+        <Col className="px-1">
           <Button
             id={idPrefix + "-increment"} 
           >

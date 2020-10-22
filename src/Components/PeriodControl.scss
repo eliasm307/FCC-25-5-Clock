@@ -1,9 +1,24 @@
 .container-period-control {
 
+  
+
   .period-label {
     text-align: center;
     width: 100%;  
-    border: 1px solid red;
+    // height: 100%;
+    border: 0px solid red;
+    display: inline-block;
+    position: relative;
+
+    p {
+      display: inline-block;  
+      margin: 0;
+      width: 100%; 
+      position: absolute;
+      top: 50%;
+      //left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
   
 }

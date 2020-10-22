@@ -23,14 +23,15 @@ const Timer = ({ className, title, idPrefix }) => {
   return ( 
     <div className="timer-container">  
       <Row
-        id= "timer-label"
+        id="timer-label"
+        className="control-label"
         noGutters
       >
         {title}
       </Row>
 
       <Row noGutters> 
-        <Col className="m-1"> 
+        <Col className=""> 
           <p
             id="time-left"
           >

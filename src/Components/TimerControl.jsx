@@ -22,12 +22,15 @@ const TimerControl = ({ className, title, idPrefix }) => {
 
   return ( 
     <div id="">  
-      <Row noGutters>
+      <Row
+        noGutters
+        className="control-label"
+      > 
         {title}
       </Row>
 
       <Row noGutters>
-        <Col className="m-1"> 
+        <Col className="px-1"> 
           <Button
             id="start_stop" 
           >
@@ -35,7 +38,7 @@ const TimerControl = ({ className, title, idPrefix }) => {
           </Button>
         </Col>  
 
-        <Col className="m-1">
+        <Col className="px-1">
           <Button
             id="reset" 
           >

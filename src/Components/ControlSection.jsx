@@ -37,34 +37,34 @@ const ControlSection = ({ className }) => {
 
       <Row noGutters className="">  
         
-        <Col md={true} className="mb-3">  
+        <Col md={true} className="control-container">  
           <PeriodControl
             title="Break Controls"
             idPrefix="break"
           />
         </Col> 
 
-        <Col md={true} className="mb-3">  
+        <Col md={true} className="control-container">  
           <PeriodControl
             title="Session Controls"
             idPrefix="session"
           />
         </Col>
 
-        <Col md={true} className="mb-3">  
+        
+
+      </Row>
+  
+      <Row noGutters>  
+
+        <Col md={true} className="control-container">  
+          <Timer
+            title="Session"
+          /> 
           <TimerControl
             title="Timer Controls"
             idPrefix="break"
           />
-        </Col>
-
-      </Row>
-  
-      <Row noGutters> 
-        <Col md={true} className="mb-3">  
-          <Timer
-            title="Session"
-          /> 
         </Col>
       </Row>
   
