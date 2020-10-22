@@ -1,12 +1,19 @@
 .timer-container {
+
+  text-align: center;
+  
   #timer-label {
     
+    text-align: center;
+    display: block;
     width: 100%;
+    
     
   }
 
   #time-left {
-
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3em;
   }
   
 }

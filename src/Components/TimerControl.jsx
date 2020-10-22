@@ -4,21 +4,12 @@ import clsx from "clsx";
 
 import { Row, Col, Button } from "react-bootstrap"; 
 
-import "./ControlSection.scss";  
+import "./ControlSection.scss";   
 
-import { numberButtons } from "../Data/NumberButtons";
-import { controlButtons } from "../Data/ControlButtons";
-
-const TimerControl = ({ className, title, idPrefix }) => {
-  // console.log("controlSection: Start"); 
+const TimerControl = ({ className, title, idPrefix }) => { 
   
-  const [displayText, setDisplayText] = React.useState("0");
-  const [previewText, setPreviewText] = React.useState("0");
-  const [lastResult, setLastResult] = React.useState("0");
-  const [evaluatedExpression, setEvaluatedExpression] = React.useState(0);
-
-  
-  // rendering a dummy p element for display as FCC tests didnt work well with textarea
+  const [displayText, setDisplayText] = React.useState("0"); 
+ 
 
   return ( 
     <div id="">  
@@ -32,7 +23,8 @@ const TimerControl = ({ className, title, idPrefix }) => {
       <Row noGutters>
         <Col className="px-1"> 
           <Button
-            id="start_stop" 
+            id="start_stop"
+            variant="outline-light"
           >
             Start/Stop
           </Button>
@@ -41,6 +33,7 @@ const TimerControl = ({ className, title, idPrefix }) => {
         <Col className="px-1">
           <Button
             id="reset" 
+            variant="outline-light" 
           >
             Reset
           </Button>

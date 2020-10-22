@@ -1,6 +1,9 @@
+
 import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
+
+import { ReactComponent as YourSvg } from '../SVG/loaf-rocket-1.svg';
 
 import { Row, Col, Button } from "react-bootstrap"; 
 
@@ -9,7 +12,7 @@ import "./Timer.scss";
 import { numberButtons } from "../Data/NumberButtons";
 import { controlButtons } from "../Data/ControlButtons";
 
-const Timer = ({ className, title, idPrefix }) => {
+const Icon = ({ className, title, idPrefix }) => {
   // console.log("controlSection: Start"); 
   
   const [displayText, setDisplayText] = React.useState("0");
@@ -21,37 +24,17 @@ const Timer = ({ className, title, idPrefix }) => {
   // rendering a dummy p element for display as FCC tests didnt work well with textarea
 
   return ( 
-    <div className="timer-container">  
-      <Row
-        id="timer-label"
-        className="control-label"
-        noGutters
-      >
-        <span>{title}</span>
-      </Row>
-
-      <Row noGutters> 
-        <Col className=""> 
-          <p
-            id="time-left"
-          >
-            25:00
-          </p>
-        </Col>  
-
-      </Row>
-      
-    </div>
+    <img src={"http://s.cdpn.io/3/kiwi.svg"}/>
     
   );
 };
 
-Timer.propTypes = {
+Icon.propTypes = {
   children: PropTypes.any,
   className: PropTypes.string, 
 };
 
-Timer.defaultProps = {
+Icon.defaultProps = {
   children: null,
   className: null, 
 };

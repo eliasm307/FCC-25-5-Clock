@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap"; 
 import ControlSection from "./Components/ControlSection";
 import HistorySection from "./Components/HistorySection";
+import Timer from "./Components/Timer";
 
 import "./global-styles.scss"; 
 
@@ -35,6 +36,10 @@ class App extends React.Component {
         <Container fluid className="app-container">
           
           <h1>25 + 5 Clock</h1> 
+
+          <Timer
+            title="Session"
+          /> 
            
           <Row noGutters>
 
