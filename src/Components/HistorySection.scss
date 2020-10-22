@@ -1,0 +1,31 @@
+$standardSpacing: 10px;
+
+#history-section { 
+
+  h2 {
+    padding-left: $standardSpacing;
+  }
+
+  #container-history { 
+    text-align: left; 
+    max-height: 72vh;
+    overflow-y: auto;
+    
+    li {
+      margin: 5px;
+      padding: ($standardSpacing * 0.5);
+      border-radius: ($standardSpacing * 0.5);
+
+      .expression {
+        font-style: italic;
+
+      }
+
+      .result {
+        font-weight: 700;
+      }
+
+    }
+  }
+  
+}

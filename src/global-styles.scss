@@ -1,0 +1,58 @@
+// import bootstrap
+// @import "~bootstrap/scss/bootstrap";
+
+$primary: black;
+$standardSpacing: 10px;
+
+.btn {
+  background-color: black;
+  border: none;
+  outline: none;
+}
+
+.btn:focus,
+.btn:active {
+  background-color: black;
+  border: none;
+  outline: none;
+
+}
+
+// for development
+.col,
+.row,
+.container {
+  border: 0px solid red;
+  // padding: 0px 0px;
+}
+
+body {
+  background-color: rgb(29, 29, 29);
+  // padding: 5%;
+  
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+ 
+  
+  color: white; 
+
+  h1 {
+    padding-top: 10px;
+  }
+  
+  section {
+    border: 1px solid gray;
+    margin: $standardSpacing $standardSpacing;
+    padding: $standardSpacing;
+    border-radius: 3px; 
+  } 
+
+}
+
+.display-none {
+  display: none;
+}
+ 

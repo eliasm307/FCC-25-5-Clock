@@ -1,0 +1,9 @@
+{
+  "editor.smoothScrolling": true,
+  "editor.formatOnType": true,
+  "files.autoSave": "afterDelay",
+  "files.insertFinalNewline": true,
+  "files.hotExit": "onExitAndWindowClose",
+  "breadcrumbs.enabled": true,
+  "search.showLineNumbers": true, 
+}

@@ -1,0 +1,48 @@
+$standardSpacing: 10px;
+
+#calculator-section {
+
+  h2 {
+    padding: 0 $standardSpacing;
+  }
+
+  #container-number-buttons,
+  #container-control-buttons,
+  #container-display {
+    
+    padding: $standardSpacing $standardSpacing;    
+  // margin: 0px;
+    
+  }
+
+  #container-display {
+    border: 0px solid red;
+    text-align: left; 
+
+    #textarea-display {
+      background-color: transparent;
+      display: block;
+      resize: none;
+      color: white;
+      width: 100%;
+      border: none;
+      outline: none;
+      border-bottom: 1px solid grey
+      
+    }
+
+    #preview { 
+      margin: 0;
+    }
+     
+  }
+
+  .btn {
+    height: 13vh;
+  }
+
+  .btn-container {
+    padding: 1px;
+    // margin: 0; 
+  }
+}

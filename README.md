@@ -1,2 +1,2 @@
-# FCC-25-5-Clock
+# FCC-JavaScript-Calculator
 Created with CodeSandbox
