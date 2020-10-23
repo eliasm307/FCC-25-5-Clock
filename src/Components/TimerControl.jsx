@@ -12,6 +12,7 @@ const TimerControl = ({
   idPrefix,
   setTimerState,
   timerRunning,
+  handleReset,
 }) => {  
   
   return ( 
@@ -38,6 +39,7 @@ const TimerControl = ({
           <Button
             id="reset" 
             variant="outline-light" 
+            onClick={handleReset}
           >
             Reset
           </Button>

@@ -15,27 +15,31 @@ TODO
 const date = new Date();
  
 
+let _timerRunning = false;
+
 const App =(props) => {
  
   const [arrayHistory, setArrayHistory] = React.useState([]); 
   const [breakVal, setBreakVal] = React.useState(5); 
   const [sessionVal, setSessionVal] = React.useState(25); 
   const [timerRunning, setTimerRunning] = React.useState(false); 
-  const [timeRemaining, setTimeRemaining] = React.useState(25*60); 
+  const [timeRemaining, setTimeRemaining] = React.useState(() => 25 * 60); 
+  
+  const date = new Date();
  
   async function countDownUntil(exitCondition) {
     console.log("APP", "-----------------\nCountownUntil start");
     return await new Promise(resolve => {
 
-      console.log("APP", "CountownUntil promise start, wait 0.5s");
+      console.log(date.toLocaleString(), "APP", "CountownUntil promise start, wait 0.5s");
 
       // wait half a second before starting 
       setTimeout(() => {
-        console.log("APP", "timeout function after 0.5s");
+        console.log(date.toLocaleString(),"APP", "timeout function after 0.5s");
 
         const interval = setInterval(() => {
  
-          console.log("APP", "CountdownUntil loop interval, current  state:", "state:", {timerRunning,  timeRemaining});
+          console.log(date.toLocaleString(),"APP", "CountdownUntil loop interval, current  state:", "state:", {timerRunning,  timeRemaining});
   
           // check if timer should still run 
           if (exitCondition || timeRemaining === 0) {
@@ -46,7 +50,7 @@ const App =(props) => {
             return
           };
 
-          console.log("APP", "CountdownUntil loop interval, DECREMENTING TIME, current timerRunning state:", "state:", { timerRunning, timeRemaining });
+          console.log(date.toLocaleString(),"APP", "CountdownUntil loop interval, DECREMENTING TIME, current timerRunning state:", "state:", { timerRunning, timeRemaining });
 
           //decrement time remaining if timer is still running
           setTimeRemaining(timeRemaining - 1);
@@ -62,12 +66,14 @@ const App =(props) => {
     
     console.log("--------APP", "current timerRunning state:", timerRunning, "requestedTimerRunning:", newTimerRunningState);
 
-    if (timerRunning) {
+    if (_timerRunning) {
       setTimerRunning(false);
+      _timerRunning = false;
     }
     else {
       setTimerRunning(true);
-      await countDownUntil(!timerRunning);
+      _timerRunning = true;
+      countDownUntil(!_timerRunning);
        
     }
   }
