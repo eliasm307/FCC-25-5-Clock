@@ -46,7 +46,10 @@ const App =(props) => {
   }
 
   const playPeriodEndSound = () => {
-    console.log("------APP", "playPeriodEndSound TBC")
+    console.log("APP", "playPeriodEndSound beep")
+    const sound = document.getElementById("beep");
+    sound.currentTime = 0;
+    sound.play(); 
   }
 
   const handleReset = (e) => {
