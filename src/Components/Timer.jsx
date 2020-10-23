@@ -50,7 +50,7 @@ const Timer = ({
           </p>
           <audio
             id="beep"
-            src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg"
+            src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"
             type="audio/ogg" />
         </Col>  
 

@@ -15,7 +15,7 @@ const date = new Date();
 
 const defaultBreakVal = 5;
 const defaultSessionVal = 25;
-let defaultTimeRemainingVal = 25 * 60;
+let defaultTimeRemainingVal = defaultSessionVal * 60;
 
 defaultTimeRemainingVal = 5;
 
@@ -41,11 +41,20 @@ const App =(props) => {
     // get sound element and save it in a variable
     soundElement = document.getElementById("beep");
 
-    // get timer end sound duration
-    soundDuration = soundElement.duration;
+    // console.log("APP", "get sound element", { soundElement});
 
-    console.log("APP", "get sound element", {soundDuration, soundElement});
+    // add event listener for wehn sound is loaded 
+    soundElement.oncanplaythrough = () => {
+      // get timer end sound duration 
+      soundDuration = soundElement.duration;
 
+      console.log("APP", "sound can play through, got sound element and duration", { soundDuration, soundElement });
+      
+      // remove this event listener after first run
+      soundElement.oncanplaythrough = null;
+
+    };
+ 
   }, [])
 
   // timer control 
@@ -57,10 +66,14 @@ const App =(props) => {
 
     const handlePeriodEnd = () => {
 
+      // setTimerRunning(false);
       // play period end sound immediately
       playPeriodEndSound();
  
-     return setTimeout(() => {
+      return setTimeout(() => {
+       
+        // setTimerRunning(true);
+
        // if it is currently a session then it is a break next
        // else it will be a session next
        isSession ? setTimeRemaining(breakVal * 60) 
@@ -68,10 +81,12 @@ const App =(props) => {
    
        // toggle is session flag
        setIsSession(() => !isSession);
+
+       
  
-     }, Math.max(soundDuration * 1000, 1000));
+     }, Math.max(soundDuration * 1000, 500));
    
-   }
+    }
     
     
     // clear any existing timeouts
@@ -87,7 +102,7 @@ const App =(props) => {
         // else decrease timer by 1 second after 1 second
         timeout = setTimeout(() => {
           setTimeRemaining(timeRemaining - 1);
-        }, 1);
+        }, 1000);
       }
  
     }
@@ -124,11 +139,13 @@ const App =(props) => {
   }
 
   const handleReset = (e) => {
+    clearTimeout(timeout);
     stopPeriodEndSound();
     setTimerState(false);
     setSessionVal(defaultSessionVal);
     setBreakVal(defaultBreakVal);
     setTimeRemaining(defaultTimeRemainingVal);
+    setIsSession(true);
 
   };
 
