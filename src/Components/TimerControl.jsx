@@ -28,7 +28,7 @@ const TimerControl = ({
         <Col className="px-1"> 
           <Button
             id="start_stop"
-            variant={timerRunning ? "outline-success" : "outline-warning"}
+            variant={timerRunning ? "outline-danger" : "outline-success"}
             onClick={(e) => setTimerState()}
           >
             Start/Stop

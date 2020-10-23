@@ -17,6 +17,7 @@ const ControlSection = ({
   ArrayHistory,
   setArrayHistory,
   setTimerState,
+  timerRunning,
 }) => { 
 
   const handleReset = (e) => {
@@ -45,6 +46,7 @@ const ControlSection = ({
             idPrefix="break"
             setTimerState={setTimerState}
             handleReset={handleReset}
+            timerRunning={timerRunning}
             
           /> 
         </Col>

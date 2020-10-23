@@ -9,14 +9,12 @@ import "./global-styles.scss";
 /*
 TODO
  
-
 */
 
 const date = new Date();
- 
 
-let _timerRunning = false;
-
+let timeout;
+  
 const App =(props) => {
  
   const [arrayHistory, setArrayHistory] = React.useState([]); 
@@ -25,57 +23,30 @@ const App =(props) => {
   const [timerRunning, setTimerRunning] = React.useState(false); 
   const [timeRemaining, setTimeRemaining] = React.useState(() => 25 * 60); 
   
-  const date = new Date();
- 
-  async function countDownUntil(exitCondition) {
-    console.log("APP", "-----------------\nCountownUntil start");
-    return await new Promise(resolve => {
+  React.useEffect(() => {
 
-      console.log(date.toLocaleString(), "APP", "CountownUntil promise start, wait 0.5s");
+    // console.log("APP", "useEffect ", { timerRunning, timeRemaining });
 
-      // wait half a second before starting 
-      setTimeout(() => {
-        console.log(date.toLocaleString(),"APP", "timeout function after 0.5s");
-
-        const interval = setInterval(() => {
- 
-          console.log(date.toLocaleString(),"APP", "CountdownUntil loop interval, current  state:", "state:", {timerRunning,  timeRemaining});
-  
-          // check if timer should still run 
-          if (exitCondition || timeRemaining === 0) {
-            console.log("APP", "CountdownUntil loop interval, EXITING, current timerRunning state:", "state:", { timerRunning, timeRemaining });
-            
-            resolve();
-            clearInterval(interval);
-            return
-          };
-
-          console.log(date.toLocaleString(),"APP", "CountdownUntil loop interval, DECREMENTING TIME, current timerRunning state:", "state:", { timerRunning, timeRemaining });
-
-          //decrement time remaining if timer is still running
-          setTimeRemaining(timeRemaining - 1);
-  
-        }, 1000);
-        
-      }, 500);
- 
-    });
-  }
-
-  const setTimerState = async (newTimerRunningState = !timerRunning) => {
+    // if timer is set to running then set a timeout to decrement timeRemaining in 1 second
+    if (timerRunning) {
+      timeout = setTimeout(() => {
+        setTimeRemaining(timeRemaining - 1);
     
-    console.log("--------APP", "current timerRunning state:", timerRunning, "requestedTimerRunning:", newTimerRunningState);
+      }, 1000);
+    }
+    
+    
+  }, [timerRunning, timeRemaining])
 
-    if (_timerRunning) {
-      setTimerRunning(false);
-      _timerRunning = false;
-    }
-    else {
-      setTimerRunning(true);
-      _timerRunning = true;
-      countDownUntil(!_timerRunning);
-       
-    }
+  const setTimerState = (newTimerRunningState = !timerRunning) => {
+    
+    // console.log("APP", "current timerRunning state:", timerRunning, "requestedTimerRunning:", newTimerRunningState);
+
+    // cancel any pending timeout if the timer state is switched off
+    if (!newTimerRunningState) clearTimeout(timeout);
+
+    // update timer state
+    setTimerRunning(newTimerRunningState);
   }
  
   return (
@@ -102,6 +73,7 @@ const App =(props) => {
             arrayHistory={arrayHistory}
             setArrayHistory={setArrayHistory}
             setTimerState={setTimerState}
+            timerRunning={timerRunning}
           />
 
           <HistorySection

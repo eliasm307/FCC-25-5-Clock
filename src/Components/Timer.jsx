@@ -11,13 +11,14 @@ const Timer = ({
   title,
   idPrefix,
   timeRemaining,
+  timerRunning,
 }) => { 
 
   return ( 
     <div className="timer-container">  
       <Row
         id="timer-label"
-        className="control-label"
+        className={"control-label "}
         noGutters
       >
         <span>{title}</span>
@@ -27,6 +28,7 @@ const Timer = ({
         <Col className=""> 
           <p
             id="time-left"
+            className={!timerRunning ? "text-danger" : "text-success"}
           >
             {timeRemaining}
           </p>
