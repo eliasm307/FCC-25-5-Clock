@@ -6,11 +6,14 @@ import { Row, Col, Button } from "react-bootstrap";
 
 import "./ControlSection.scss";   
 
-const TimerControl = ({ className, title, idPrefix }) => { 
+const TimerControl = ({
+  className,
+  title,
+  idPrefix,
+  setTimerState,
+  timerRunning,
+}) => {  
   
-  const [displayText, setDisplayText] = React.useState("0"); 
- 
-
   return ( 
     <div id="">  
       <Row
@@ -24,7 +27,8 @@ const TimerControl = ({ className, title, idPrefix }) => {
         <Col className="px-1"> 
           <Button
             id="start_stop"
-            variant="outline-light"
+            variant={timerRunning ? "outline-success" : "outline-warning"}
+            onClick={(e) => setTimerState()}
           >
             Start/Stop
           </Button>

@@ -9,12 +9,18 @@ import "./PeriodControl.scss";
 import { numberButtons } from "../Data/NumberButtons";
 import { controlButtons } from "../Data/ControlButtons";
 
-const PeriodControl = ({ className, title, idPrefix }) => {
-  // console.log("controlSection: Start"); 
-  
-  const [displayText, setDisplayText] = React.useState("0"); 
-  
-  // rendering a dummy p element for display as FCC tests didnt work well with textarea
+const PeriodControl = ({ className, title, idPrefix, periodVal=-1, periodSetter }) => { 
+
+  const handlePeriodChange = (delta) => {
+
+    if ((delta === 1 && periodVal < 60)
+      || (delta === -1 && periodVal > 1)) {
+      
+      // apply period change if period will still be within limits
+      periodSetter(periodVal + delta);
+      
+    } 
+  }
 
   return ( 
     <div className="container-period-control">  
@@ -32,34 +38,39 @@ const PeriodControl = ({ className, title, idPrefix }) => {
           xs={12} 
           className="period-label"
         > 
-          <p
+          <span
             id={idPrefix + "-length"}
           >
-            {idPrefix + "-length"}
-          </p>
+            {periodVal}
+          </span>
+          <span>
+            {" " + (periodVal === 1 ? "Minute" : "Minutes")}
+          </span>
         </Col> 
 
       </Row>
 
       <Row noGutters>
         
-      <Col className="px-1"> 
+        <Col className="px-1"> 
           <Button
-            id={idPrefix + "-decrement"}  
+            id={idPrefix + "-decrement"}
             variant="outline-danger"
+            onClick={(e)=>handlePeriodChange(-1)}
           >
             -
           </Button>
         </Col> 
 
-<Col className="px-1">
-  <Button
-    id={idPrefix + "-increment"} 
-    variant="outline-success"
-  >
-    +
-  </Button>
-</Col> 
+        <Col className="px-1">
+          <Button
+            id={idPrefix + "-increment"} 
+            variant="outline-success"
+            onClick={(e)=>handlePeriodChange(1)}
+          >
+            +
+          </Button>
+        </Col> 
 
       </Row>
       

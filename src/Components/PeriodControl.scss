@@ -9,16 +9,9 @@ $standardSpacing: 10px;
     // border: 0px solid red;
     display: inline-block;
     position: relative;
-
-    p {
-      font-family: 'Orbitron', sans-serif;
-      display: inline-block;  
-      // padding: 0;
-      width: 100%; 
-      //position: absolute;
-      // top: 50%; 
-      // transform: translate(-50%, -50%);
-    }
+    font-family: 'Orbitron', sans-serif;
+    padding-bottom: $standardSpacing; 
+    
   }
   
 }

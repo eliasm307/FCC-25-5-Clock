@@ -1,20 +1,24 @@
 import React from "react";
-import PropTypes from "prop-types";
-import clsx from "clsx";
+import PropTypes from "prop-types"; 
 
 import { Row, Col } from "react-bootstrap"; 
 import PeriodControl from "./PeriodControl";  
 
 import "./ControlSection.scss";  
  
-import TimerControl from "./TimerControl";
-import Timer from "./Timer";
+import TimerControl from "./TimerControl"; 
  
-const ControlSection = ({ className }) => { 
-  
-  const [displayText, setDisplayText] = React.useState("0"); 
- 
-
+const ControlSection = ({
+  className, 
+  breakVal,
+  setBreakVal,
+  sessionVal,
+  setSessionVal,
+  ArrayHistory,
+  setArrayHistory,
+  setTimerState,
+}) => { 
+   
   return (
     
     <section
@@ -32,6 +36,7 @@ const ControlSection = ({ className }) => {
           <TimerControl
             title="Timer Controls"
             idPrefix="break"
+            setTimerState={setTimerState}
           /> 
         </Col>
         
@@ -39,6 +44,8 @@ const ControlSection = ({ className }) => {
           <PeriodControl
             title="Break"
             idPrefix="break"
+            periodVal={breakVal}
+            periodSetter={setBreakVal}
           />
         </Col> 
 
@@ -46,6 +53,8 @@ const ControlSection = ({ className }) => {
           <PeriodControl
             title="Session"
             idPrefix="session"
+            periodVal={sessionVal}
+            periodSetter={setSessionVal}
           />
         </Col>
  

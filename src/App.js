@@ -15,48 +15,100 @@ TODO
 const date = new Date();
  
 
-class App extends React.Component {
+const App =(props) => {
+ 
+  const [arrayHistory, setArrayHistory] = React.useState([]); 
+  const [breakVal, setBreakVal] = React.useState(5); 
+  const [sessionVal, setSessionVal] = React.useState(25); 
+  const [timerRunning, setTimerRunning] = React.useState(false); 
+  const [timeRemaining, setTimeRemaining] = React.useState(25*60); 
+ 
+  async function countDownUntil(exitCondition) {
+    console.log("APP", "-----------------\nCountownUntil start");
+    return await new Promise(resolve => {
 
-  constructor(props) {
-    super(props);
+      console.log("APP", "CountownUntil promise start, wait 0.5s");
 
-    this.state = { 
-      arrayHistory: []
-    }
+      // wait half a second before starting 
+      setTimeout(() => {
+        console.log("APP", "timeout function after 0.5s");
+
+        const interval = setInterval(() => {
+ 
+          console.log("APP", "CountdownUntil loop interval, current  state:", "state:", {timerRunning,  timeRemaining});
   
+          // check if timer should still run 
+          if (exitCondition || timeRemaining === 0) {
+            console.log("APP", "CountdownUntil loop interval, EXITING, current timerRunning state:", "state:", { timerRunning, timeRemaining });
+            
+            resolve();
+            clearInterval(interval);
+            return
+          };
 
+          console.log("APP", "CountdownUntil loop interval, DECREMENTING TIME, current timerRunning state:", "state:", { timerRunning, timeRemaining });
+
+          //decrement time remaining if timer is still running
+          setTimeRemaining(timeRemaining - 1);
+  
+        }, 1000);
+        
+      }, 500);
+ 
+    });
+  }
+
+  const setTimerState = async (newTimerRunningState = !timerRunning) => {
+    
+    console.log("--------APP", "current timerRunning state:", timerRunning, "requestedTimerRunning:", newTimerRunningState);
+
+    if (timerRunning) {
+      setTimerRunning(false);
+    }
+    else {
+      setTimerRunning(true);
+      await countDownUntil(!timerRunning);
+       
+    }
   }
  
+  return (
+    <>
+      <Container fluid className="app-container">
+        
+        <h1>25 + 5 Clock</h1> 
 
-  render() {
-    // console.log(date.toLocaleString(), "App pre-render, this.state.arrayHistory", this.state.arrayHistory);
- 
-    return (
-      <>
-        <Container fluid className="app-container">
+        <Timer
+          title="Session"
+          breakVal={breakVal}
+          sessionVal={sessionVal}
+          timeRemaining={timeRemaining}
+          timerRunning={timerRunning}
+        /> 
           
-          <h1>25 + 5 Clock</h1> 
+        <Row noGutters>
 
-          <Timer
-            title="Session"
-          /> 
-           
-          <Row noGutters>
+          <ControlSection 
+            breakVal={breakVal}
+            setBreakVal={setBreakVal}
+            sessionVal={sessionVal}
+            setSessionVal={setSessionVal}
+            arrayHistory={arrayHistory}
+            setArrayHistory={setArrayHistory}
+            setTimerState={setTimerState}
+          />
 
-            <ControlSection 
-            />
+          <HistorySection
+            arrayHistory={arrayHistory}
+          />
 
-            <HistorySection
-              arrayHistory={this.state.arrayHistory}
-            />
+        </Row>
+          
+      </Container>
+    </>
+  );
 
-          </Row>
-           
-        </Container>
-      </>
-    );
 
-  }
 
 }
  

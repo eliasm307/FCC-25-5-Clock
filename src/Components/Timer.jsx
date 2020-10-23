@@ -4,21 +4,14 @@ import clsx from "clsx";
 
 import { Row, Col, Button } from "react-bootstrap"; 
 
-import "./Timer.scss";  
+import "./Timer.scss";   
 
-import { numberButtons } from "../Data/NumberButtons";
-import { controlButtons } from "../Data/ControlButtons";
-
-const Timer = ({ className, title, idPrefix }) => {
-  // console.log("controlSection: Start"); 
-  
-  const [displayText, setDisplayText] = React.useState("0");
-  const [previewText, setPreviewText] = React.useState("0");
-  const [lastResult, setLastResult] = React.useState("0");
-  const [evaluatedExpression, setEvaluatedExpression] = React.useState(0);
-
-  
-  // rendering a dummy p element for display as FCC tests didnt work well with textarea
+const Timer = ({
+  className,
+  title,
+  idPrefix,
+  timeRemaining,
+}) => { 
 
   return ( 
     <div className="timer-container">  
@@ -35,7 +28,7 @@ const Timer = ({ className, title, idPrefix }) => {
           <p
             id="time-left"
           >
-            25:00
+            {timeRemaining}
           </p>
         </Col>  
 
