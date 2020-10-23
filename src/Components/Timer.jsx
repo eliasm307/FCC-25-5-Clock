@@ -26,6 +26,10 @@ const Timer = ({
     return sMinutes.padStart(2, "0") + ":" + sSeconds.padStart(2, "0")
   }
 
+  // https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg
+
+  // https://actions.google.com/sounds/v1/alarms/beep_short.ogg
+
   return ( 
     <div className="timer-container">  
       <Row
@@ -46,7 +50,7 @@ const Timer = ({
           </p>
           <audio
             id="beep"
-            src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"
+            src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg"
             type="audio/ogg" />
         </Col>  
 

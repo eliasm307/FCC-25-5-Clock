@@ -20,6 +20,9 @@ let defaultTimeRemainingVal = 25 * 60;
 defaultTimeRemainingVal = 5;
 
 let timeout;
+
+let soundElement;
+let soundDuration;
   
 const App =(props) => {
  
@@ -32,34 +35,20 @@ const App =(props) => {
   
   
 
-  
-
-  const setTimerState = (newTimerRunningState = !timerRunning) => {
+  // run once
+  React.useEffect(() => {
     
-    // console.log("APP", "current timerRunning state:", timerRunning, "requestedTimerRunning:", newTimerRunningState);
+    // get sound element and save it in a variable
+    soundElement = document.getElementById("beep");
 
-    // cancel any pending timeout if the timer state is switched off
-    // if (!newTimerRunningState) clearTimeout(timeout);
+    // get timer end sound duration
+    soundDuration = soundElement.duration;
 
-    // update timer state
-    setTimerRunning(newTimerRunningState);
-  }
+    console.log("APP", "get sound element", {soundDuration, soundElement});
 
-  const playPeriodEndSound = () => {
-    console.log("APP", "playPeriodEndSound beep")
-    const sound = document.getElementById("beep");
-    sound.currentTime = 0;
-    sound.play(); 
-  }
+  }, [])
 
-  const handleReset = (e) => {
-    setTimerState(false);
-    setSessionVal(defaultSessionVal);
-    setBreakVal(defaultBreakVal);
-    setTimeRemaining(defaultTimeRemainingVal);
-
-  };
-
+  // timer control 
   React.useEffect(() => {
 
     // console.log("APP", "useEffect ", { timerRunning, timeRemaining });
@@ -80,15 +69,16 @@ const App =(props) => {
        // toggle is session flag
        setIsSession(() => !isSession);
  
-     }, 1000);
+     }, Math.max(soundDuration * 1000, 1000));
    
    }
     
+    
     // clear any existing timeouts
     clearTimeout(timeout)
-    
+
     if (timerRunning) {
-       
+
       if (timeRemaining === 0) {
         // time remaining is completed, run the period end handler
         timeout = handlePeriodEnd();
@@ -97,13 +87,51 @@ const App =(props) => {
         // else decrease timer by 1 second after 1 second
         timeout = setTimeout(() => {
           setTimeRemaining(timeRemaining - 1);
-        }, 1000);
+        }, 1);
       }
  
     }
      
   }, [timerRunning, timeRemaining, breakVal, isSession, sessionVal]);
  
+
+  
+
+  const setTimerState = (newTimerRunningState = !timerRunning) => {
+    
+    // console.log("APP", "current timerRunning state:", timerRunning, "requestedTimerRunning:", newTimerRunningState);
+
+    // cancel any pending timeout if the timer state is switched off
+    // if (!newTimerRunningState) clearTimeout(timeout);
+
+    // update timer state
+    setTimerRunning(newTimerRunningState);
+  }
+
+  const playPeriodEndSound = () => {
+    // console.log("APP", "playPeriodEndSound beep")
+    // const sound = document.getElementById("beep");
+    soundElement.currentTime = 0;
+    soundElement.play(); 
+  }
+
+  const stopPeriodEndSound = () => {
+    // console.log("APP", "stopPeriodEndSound beep")
+    // const sound = document.getElementById("beep");
+    soundElement.pause(); 
+    soundElement.currentTime = 0;
+    
+  }
+
+  const handleReset = (e) => {
+    stopPeriodEndSound();
+    setTimerState(false);
+    setSessionVal(defaultSessionVal);
+    setBreakVal(defaultBreakVal);
+    setTimeRemaining(defaultTimeRemainingVal);
+
+  };
+
   return (
     <>
       <Container fluid className="app-container">
