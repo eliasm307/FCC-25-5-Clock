@@ -19,6 +19,8 @@ const ControlSection = ({
   setTimerState,
   timerRunning,
   handleReset,
+  isSession,
+  setTimeRemaining,
 }) => { 
 
   
@@ -49,21 +51,29 @@ const ControlSection = ({
         
         <Col md={true} className="control-container">  
           <PeriodControl
-            title="Break"
-            idPrefix="break"
-            periodVal={breakVal}
-            periodSetter={setBreakVal}
-          />
-        </Col> 
-
-        <Col md={true} className="control-container">  
-          <PeriodControl
             title="Session"
             idPrefix="session"
             periodVal={sessionVal}
-            periodSetter={setSessionVal}
+            periodSetter={(newPeriodVal) => {
+              if (isSession) setTimeRemaining(newPeriodVal*60);
+              setSessionVal(newPeriodVal);
+            }}
           />
         </Col>
+        
+        <Col md={true} className="control-container">  
+          <PeriodControl
+            title="Break"
+            idPrefix="break"
+            periodVal={breakVal}
+            periodSetter={(newPeriodVal) => {
+              if (!isSession) setTimeRemaining(newPeriodVal*60);
+              setBreakVal(newPeriodVal);
+            }}
+          />
+        </Col> 
+
+        
  
       </Row>
    

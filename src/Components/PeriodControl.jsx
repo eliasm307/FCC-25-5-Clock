@@ -9,7 +9,12 @@ import "./PeriodControl.scss";
 import { numberButtons } from "../Data/NumberButtons";
 import { controlButtons } from "../Data/ControlButtons";
 
-const PeriodControl = ({ className, title, idPrefix, periodVal=-1, periodSetter }) => { 
+const PeriodControl = ({
+  className,
+  title,
+  idPrefix,
+  periodVal = -1,
+  periodSetter }) => { 
 
   const handlePeriodChange = (delta) => {
 

@@ -17,12 +17,13 @@ const defaultBreakVal = 5;
 const defaultSessionVal = 25;
 let defaultTimeRemainingVal = defaultSessionVal * 60;
 
-defaultTimeRemainingVal = 5;
+// defaultTimeRemainingVal = 5;
 
 let timeout;
 
 let soundElement;
 let soundDuration;
+
   
 const App =(props) => {
  
@@ -71,29 +72,40 @@ const App =(props) => {
       playPeriodEndSound();
  
       return setTimeout(() => {
-       
-        // setTimerRunning(true);
 
-       // if it is currently a session then it is a break next
-       // else it will be a session next
-       isSession ? setTimeRemaining(breakVal * 60) 
-                 : setTimeRemaining(sessionVal * 60);
-   
-       // toggle is session flag
-       setIsSession(() => !isSession);
+        try {
+          // setTimerRunning(true);
 
+          // if it is currently a session then it is a break next
+          // else it will be a session next
+          isSession ? setTimeRemaining(breakVal * 60) 
+          : setTimeRemaining(sessionVal * 60);
+
+          // toggle is session flag
+          setIsSession(!isSession); 
+
+        }
+        catch (error) {
+          console.log("handlePeriodEnd ERROR", error)
+        }
        
- 
-     }, Math.max(soundDuration * 1000, 500));
+
+        
+        
+     }, soundDuration * 1000);
    
     }
+    
+
+    // use the null is session flag to know if it is the first run
+    if (isSession === null) setTimeRemaining(sessionVal*60);
     
     
     // clear any existing timeouts
     clearTimeout(timeout)
 
     if (timerRunning) {
-
+ 
       if (timeRemaining === 0) {
         // time remaining is completed, run the period end handler
         timeout = handlePeriodEnd();
@@ -119,6 +131,9 @@ const App =(props) => {
     // cancel any pending timeout if the timer state is switched off
     // if (!newTimerRunningState) clearTimeout(timeout);
 
+    // for the first session, set the flag implicitly
+    if (isSession === null) setIsSession(true);
+
     // update timer state
     setTimerRunning(newTimerRunningState);
   }
@@ -139,6 +154,7 @@ const App =(props) => {
   }
 
   const handleReset = (e) => {
+    console.log("handleReset");
     clearTimeout(timeout);
     stopPeriodEndSound();
     setTimerState(false);
@@ -176,6 +192,8 @@ const App =(props) => {
             setTimerState={setTimerState}
             timerRunning={timerRunning}
             handleReset={handleReset}
+            isSession={isSession}
+            setTimeRemaining={setTimeRemaining}
           />
 
           <HistorySection

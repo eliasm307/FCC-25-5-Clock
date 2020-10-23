@@ -23,7 +23,7 @@ const Timer = ({
 
     // console.log("Timer", {iSeconds, sMinutes, sSeconds})
 
-    return sMinutes.padStart(2, "0") + ":" + sSeconds.padStart(2, "0")
+    return sMinutes.padStart(2, "0") + ":" + sSeconds.padStart(2, "0") || "00:00";
   }
 
   // https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg
