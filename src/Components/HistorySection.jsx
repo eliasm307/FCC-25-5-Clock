@@ -5,9 +5,8 @@ import { Row, Col } from "react-bootstrap";
 
 import "./HistorySection.scss";
 
-const HistorySection = ({ arrayHistory, className, ...restProps }) => {
+const HistorySection = ({ arrayHistory, className }) => {
   // console.log("HistorySection: Start"); 
-
   // console.log("HistorySection, arrayHistory:", arrayHistory ); 
 
   const historyListJSX = arrayHistory.map(({expression, result}, i) => {

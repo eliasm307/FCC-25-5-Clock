@@ -48,10 +48,7 @@ const Timer = ({
           >
             {formatSecondsAsTime(timeRemaining)}
           </p>
-          <audio
-            id="beep"
-            src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"
-            type="audio/ogg" />
+          
         </Col>  
 
       </Row>

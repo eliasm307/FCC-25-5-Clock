@@ -15,18 +15,14 @@ const date = new Date();
 
 const defaultBreakVal = 5;
 const defaultSessionVal = 25;
-let defaultTimeRemainingVal = defaultSessionVal * 60;
+const defaultTimeRemainingVal = defaultSessionVal * 60; 
 
-// defaultTimeRemainingVal = 5;
-
-let timeout;
-
-let soundElement;
+let timeout; 
 let soundDuration;
 
-  
-const App =(props) => {
+const App = (props) => {
  
+  // state variables
   const [arrayHistory, setArrayHistory] = React.useState([]); 
   const [breakVal, setBreakVal] = React.useState(defaultBreakVal); 
   const [sessionVal, setSessionVal] = React.useState(defaultSessionVal); 
@@ -34,36 +30,39 @@ const App =(props) => {
   const [timeRemaining, setTimeRemaining] = React.useState(defaultTimeRemainingVal); 
   const [isSession, setIsSession] = React.useState(true); 
   
-  
+  // refs
+  const soundElement = React.useRef(null);
 
   // run once
   React.useEffect(() => {
     
     // get sound element and save it in a variable
-    soundElement = document.getElementById("beep");
+    // soundElement = document.getElementById("beep");
 
-    // console.log("APP", "get sound element", { soundElement});
+    console.log("APP", "get sound element", soundElement.current);
 
-    // add event listener for wehn sound is loaded 
-    soundElement.oncanplaythrough = () => {
+    // get timer end sound duration 
+    soundDuration = soundElement.current.duration;
+ 
+    /* 
+
+    // add event listener for when sound is loaded 
+    soundElement.current.oncanplaythrough = () => {
       // get timer end sound duration 
-      soundDuration = soundElement.duration;
+      soundDuration = soundElement.current.duration;
 
       console.log("APP", "sound can play through, got sound element and duration", { soundDuration, soundElement });
       
       // remove this event listener after first run
-      soundElement.oncanplaythrough = null;
+      soundElement.current.oncanplaythrough = null;
 
     };
+    */
  
   }, [])
 
   // timer control 
-  React.useEffect(() => {
-
-    // console.log("APP", "useEffect ", { timerRunning, timeRemaining });
-
-    // if timer is set to running then set a timeout to decrement timeRemaining in 1 second
+  React.useEffect(() => { 
 
     const handlePeriodEnd = () => {
 
@@ -79,7 +78,7 @@ const App =(props) => {
           // if it is currently a session then it is a break next
           // else it will be a session next
           isSession ? setTimeRemaining(breakVal * 60) 
-          : setTimeRemaining(sessionVal * 60);
+                    : setTimeRemaining(sessionVal * 60);
 
           // toggle is session flag
           setIsSession(!isSession); 
@@ -88,19 +87,11 @@ const App =(props) => {
         catch (error) {
           console.log("handlePeriodEnd ERROR", error)
         }
-       
-
-        
         
      }, soundDuration * 1000);
    
     }
-    
-
-    // use the null is session flag to know if it is the first run
-    if (isSession === null) setTimeRemaining(sessionVal*60);
-    
-    
+      
     // clear any existing timeouts
     clearTimeout(timeout)
 
@@ -124,32 +115,56 @@ const App =(props) => {
 
   
 
-  const setTimerState = (newTimerRunningState = !timerRunning) => {
-    
-    // console.log("APP", "current timerRunning state:", timerRunning, "requestedTimerRunning:", newTimerRunningState);
-
-    // cancel any pending timeout if the timer state is switched off
-    // if (!newTimerRunningState) clearTimeout(timeout);
-
-    // for the first session, set the flag implicitly
-    if (isSession === null) setIsSession(true);
+  const setTimerState = (newTimerRunningState = !timerRunning) => { 
 
     // update timer state
     setTimerRunning(newTimerRunningState);
   }
 
-  const playPeriodEndSound = () => {
-    // console.log("APP", "playPeriodEndSound beep")
-    // const sound = document.getElementById("beep");
-    soundElement.currentTime = 0;
-    soundElement.play(); 
-  }
+  
 
   const stopPeriodEndSound = () => {
-    // console.log("APP", "stopPeriodEndSound beep")
+    console.log("APP", "stopPeriodEndSound beep")
     // const sound = document.getElementById("beep");
-    soundElement.pause(); 
-    soundElement.currentTime = 0;
+
+    try {
+      soundElement.current.pause(); 
+      soundElement.current.currentTime = 0;
+      
+    } catch (error) {
+      console.log("stopPeriodEndSound ERROR", error)
+    } 
+  }
+
+  const playPeriodEndSound = () => {
+     console.log("APP", "playPeriodEndSound beep", soundElement.current)
+    // const sound = document.getElementById("beep");
+    try {
+      stopPeriodEndSound();
+      soundElement.current.currentTime = 0;
+      
+      // Playing audio in chrome
+      // from https://stackoverflow.com/questions/56398641/react-error-when-using-audio-play-function
+      var playPromise = soundElement.current.play(); 
+
+      if (playPromise !== undefined) {
+        playPromise
+          .then(_ => {
+            // Automatic playback started!
+            // Show playing UI.
+            console.log("audio played auto");
+          })
+          .catch(error => {
+            // Auto-play was prevented
+            // Show paused UI.
+            console.log("playback prevented");
+          });
+      }
+
+    }
+    catch (error) {
+      console.log("playPeriodEndSound ERROR", error)
+    }
     
   }
 
@@ -179,6 +194,13 @@ const App =(props) => {
           timerRunning={timerRunning}
           isSession={isSession}
         /> 
+
+        <audio
+          id="beep"
+          src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"
+          type="audio/ogg"
+          ref={soundElement}
+        />
           
         <Row noGutters>
 
@@ -205,9 +227,7 @@ const App =(props) => {
       </Container>
     </>
   );
-
-
-
+ 
 }
  
 export default App

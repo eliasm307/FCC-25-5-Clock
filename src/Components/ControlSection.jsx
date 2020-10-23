@@ -22,8 +22,6 @@ const ControlSection = ({
   isSession,
   setTimeRemaining,
 }) => { 
-
-  
    
   return (
     
@@ -71,13 +69,10 @@ const ControlSection = ({
               setBreakVal(newPeriodVal);
             }}
           />
-        </Col> 
+        </Col>  
 
-        
- 
-      </Row>
-   
-  
+      </Row> 
+
     </section> 
     
   );

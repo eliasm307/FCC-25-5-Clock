@@ -1,13 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";
-import clsx from "clsx";
+import PropTypes from "prop-types"; 
 
 import { Row, Col, Button } from "react-bootstrap"; 
 
-import "./PeriodControl.scss";  
-
-import { numberButtons } from "../Data/NumberButtons";
-import { controlButtons } from "../Data/ControlButtons";
+import "./PeriodControl.scss";   
 
 const PeriodControl = ({
   className,
