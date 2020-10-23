@@ -28,34 +28,29 @@ const ControlSection = ({ className }) => {
 
       <Row noGutters className="">   
         
+      <Col className="col-12 control-container">
+          <TimerControl
+            title="Timer Controls"
+            idPrefix="break"
+          /> 
+        </Col>
+        
         <Col md={true} className="control-container">  
           <PeriodControl
-            title="Break Controls"
+            title="Break"
             idPrefix="break"
           />
         </Col> 
 
         <Col md={true} className="control-container">  
           <PeriodControl
-            title="Session Controls"
+            title="Session"
             idPrefix="session"
           />
         </Col>
-
-        
-        
-
+ 
       </Row>
-  
-      <Row noGutters>  
-
-        <Col className="control-container">
-          <TimerControl
-            title="Timer Controls"
-            idPrefix="break"
-          /> 
-        </Col>
-      </Row>
+   
   
     </section> 
     

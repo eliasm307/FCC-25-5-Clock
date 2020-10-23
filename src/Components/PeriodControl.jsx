@@ -27,17 +27,9 @@ const PeriodControl = ({ className, title, idPrefix }) => {
       </Row>
 
       <Row noGutters>
-        <Col className="px-1"> 
-          <Button
-            id={idPrefix + "-decrement"}  
-            variant="outline-danger"
-          >
-            -
-          </Button>
-        </Col> 
 
         <Col
-          xs={6} 
+          xs={12} 
           className="period-label"
         > 
           <p
@@ -47,14 +39,27 @@ const PeriodControl = ({ className, title, idPrefix }) => {
           </p>
         </Col> 
 
-        <Col className="px-1">
+      </Row>
+
+      <Row noGutters>
+        
+      <Col className="px-1"> 
           <Button
-            id={idPrefix + "-increment"} 
-            variant="outline-success"
+            id={idPrefix + "-decrement"}  
+            variant="outline-danger"
           >
-            +
+            -
           </Button>
         </Col> 
+
+<Col className="px-1">
+  <Button
+    id={idPrefix + "-increment"} 
+    variant="outline-success"
+  >
+    +
+  </Button>
+</Col> 
 
       </Row>
       

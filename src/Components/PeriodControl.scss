@@ -1,7 +1,7 @@
+$standardSpacing: 10px;
+
 .container-period-control {
-
-  
-
+ 
   .period-label {
     text-align: center;
     width: 100%;  
@@ -11,13 +11,13 @@
     position: relative;
 
     p {
+      font-family: 'Orbitron', sans-serif;
       display: inline-block;  
-      margin: 0;
+      // padding: 0;
       width: 100%; 
-      position: absolute;
-      top: 50%;
-      //left: 50%;
-      transform: translate(-50%, -50%);
+      //position: absolute;
+      // top: 50%; 
+      // transform: translate(-50%, -50%);
     }
   }
   
