@@ -18,14 +18,10 @@ const ControlSection = ({
   setArrayHistory,
   setTimerState,
   timerRunning,
+  handleReset,
 }) => { 
 
-  const handleReset = (e) => {
-    setTimerState(false);
-    setSessionVal(25);
-    setBreakVal(5);
-
-  };
+  
    
   return (
     

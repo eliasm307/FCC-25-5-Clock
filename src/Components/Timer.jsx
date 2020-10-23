@@ -12,7 +12,19 @@ const Timer = ({
   idPrefix,
   timeRemaining,
   timerRunning,
+  isSession,
 }) => { 
+
+
+  const formatSecondsAsTime = (iSeconds) => {
+    
+    let sMinutes = Math.floor(iSeconds / 60) + "";
+    let sSeconds = iSeconds % 60 + "";
+
+    // console.log("Timer", {iSeconds, sMinutes, sSeconds})
+
+    return sMinutes.padStart(2, "0") + ":" + sSeconds.padStart(2, "0")
+  }
 
   return ( 
     <div className="timer-container">  
@@ -21,7 +33,7 @@ const Timer = ({
         className={"control-label "}
         noGutters
       >
-        <span>{title}</span>
+        <span>{isSession ? "Session" : "Break"}</span>
       </Row>
 
       <Row noGutters> 
@@ -30,7 +42,7 @@ const Timer = ({
             id="time-left"
             className={!timerRunning ? "text-danger" : "text-success"}
           >
-            {timeRemaining}
+            {formatSecondsAsTime(timeRemaining)}
           </p>
         </Col>  
 
